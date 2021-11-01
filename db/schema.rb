@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_061603) do
+ActiveRecord::Schema.define(version: 2021_11_01_030545) do
+
+  create_table "members", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "party_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["party_id"], name: "index_members_on_party_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "parties", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer "age"
@@ -20,4 +42,7 @@ ActiveRecord::Schema.define(version: 2021_10_29_061603) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "members", "parties"
+  add_foreign_key "members", "users"
+  add_foreign_key "relationships", "users"
 end
