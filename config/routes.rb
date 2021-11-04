@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'parties/join'
   resources :relationships
   resources :users
   root to: 'toppage#index'
