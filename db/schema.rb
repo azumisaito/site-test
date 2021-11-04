@@ -29,8 +29,11 @@ ActiveRecord::Schema.define(version: 2021_11_01_030545) do
 
   create_table "relationships", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "friend_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["friend_id"], name: "index_relationships_on_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_relationships_on_user_id_and_friend_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
@@ -45,4 +48,5 @@ ActiveRecord::Schema.define(version: 2021_11_01_030545) do
   add_foreign_key "members", "parties"
   add_foreign_key "members", "users"
   add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "users", column: "friend_id"
 end
