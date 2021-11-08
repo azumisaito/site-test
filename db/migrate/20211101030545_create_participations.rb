@@ -1,6 +1,6 @@
-class CreateMembers < ActiveRecord::Migration[6.1]
+class CreateParticipations < ActiveRecord::Migration[6.1]
   def change
-    create_table :members do |t|
+    create_table :participations do |t|
       t.references :user, null: false, foreign_key: true
       t.references :party, null: false, foreign_key: true
 
